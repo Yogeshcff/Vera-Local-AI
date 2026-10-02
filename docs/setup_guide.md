@@ -4,12 +4,13 @@
 
 Required software:
 
-* Python 3.10 or later (only if using the optional backend).
+* Python 3.10 or later.
 * Visual Studio Code.
 * Git.
 * A modern web browser.
+* A Groq API key.
 
-No Ollama installation, AI model download, or API key is required.
+No Ollama installation or local AI model download is required.
 
 ## 2. Project Location
 
@@ -17,20 +18,74 @@ No Ollama installation, AI model download, or API key is required.
 D:\Yogesh\Vera-Local-AI
 ```
 
-## 3. Opening the Project
+## 3. Clone the Repository
 
-1. Open Visual Studio Code.
-2. Open the Vera-Local-AI project folder.
-3. Navigate to the `frontend` directory.
-4. Open `index.html` in a browser for basic interface testing.
+```powershell
+git clone https://github.com/Yogeshcff/Vera-Local-AI.git
+cd Vera-Local-AI
+```
 
-For proper PWA functionality, use a local development server or deploy the application over HTTPS.
+Open the project folder in Visual Studio Code.
 
-## 4. Local Development
+## 4. Backend Setup
 
-The frontend can be tested using the VS Code Live Server extension.
+### Create a Virtual Environment
 
-Alternatively, from the project root, run:
+```powershell
+python -m venv .venv
+```
+
+### Activate the Environment
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+### Install Dependencies
+
+```powershell
+pip install -r backend/requirements.txt
+```
+
+### Configure Environment Variables
+
+Create a `.env` file in the project root using `.env.example` as a template.
+
+Add your Groq API key:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+Never commit the real `.env` file to GitHub.
+
+## 5. Run the Backend
+
+From the project root, execute:
+
+```powershell
+python -m uvicorn backend.main:app --reload --port 8000
+```
+
+Backend URL:
+
+```text
+http://127.0.0.1:8000
+```
+
+API documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Stop the server using `Ctrl + C`.
+
+## 6. Run the Frontend Locally
+
+Open a second terminal from the project root.
+
+Run:
 
 ```powershell
 python -m http.server 5500 --directory frontend
@@ -42,51 +97,63 @@ Open:
 http://localhost:5500
 ```
 
-Stop the server using `Ctrl + C`.
+Ensure the backend is running before testing chat functionality.
 
-## 5. Installing Vera AI on a Phone
+## 7. Production Deployment
 
-1. Deploy the application to an HTTPS website.
-2. Open the website in the mobile browser.
-3. Select the browser's Install App or Add to Home Screen option.
-4. Launch Vera AI from the home screen.
+Vera AI is deployed using separate frontend and backend hosting services.
 
-The exact installation steps may vary by browser and device.
+| Component    | Platform     |
+| ------------ | ------------ |
+| Frontend     | GitHub Pages |
+| Backend      | Render       |
+| AI Inference | Groq API     |
 
-## 6. Offline Functionality
+### Live Application
 
-After the first successful load, the service worker can cache essential application resources.
+https://yogeshcff.github.io/Vera-Local-AI/
 
-Basic chatbot functionality can then work offline, provided the required files have been cached successfully.
+### Backend
 
-## 7. Deployment
+https://vera-ai-backend-9occ.onrender.com
 
-The initial frontend can be deployed using a free static hosting service that supports HTTPS.
+The production backend requires the `GROQ_API_KEY` environment variable to be configured in Render.
 
-The deployment should include:
+## 8. Installing Vera AI on a Phone
 
-* `index.html`
-* `style.css`
-* `script.js`
-* `manifest.json`
-* `service-worker.js`
+1. Open the live application in a supported mobile browser.
+2. Use the browser's Install App or Add to Home Screen option if available.
+3. Launch Vera AI from the home screen.
 
-## 8. Troubleshooting
+Installation availability depends on browser support and PWA configuration.
 
-### Page does not load
+## 9. Troubleshooting
 
-Check the local server or hosting URL.
+### Backend Does Not Start
 
-### Install option is unavailable
+* Verify that the virtual environment is activated.
+* Install dependencies.
+* Check that the `.env` file exists and contains a valid API key.
 
-Verify that the site is served over HTTPS or localhost and that the PWA manifest is configured correctly.
+### Chat Does Not Respond
 
-### Offline mode does not work
+* Confirm that the backend is running.
+* Check the backend logs.
+* Verify the Groq API key and API availability.
+* Check browser developer tools for network or CORS errors.
 
-Check whether the service worker has registered and cached the application files.
+### Frontend Cannot Connect to Backend
 
-## 9. Cost
+Verify that the frontend is configured to use the correct backend URL and that the backend permits the frontend's origin.
 
-The initial application requires no paid AI API, external inference service, or local AI model.
+### Slow First Response
 
-Free hosting availability and limits depend on the selected provider.
+The Render free-tier service may sleep after inactivity. The first request can take longer while the service wakes up.
+
+## 10. Cost
+
+Vera AI uses GitHub Pages, Render, and Groq API services.
+
+Free-tier availability, usage limits, and service policies depend on the respective providers.
+
+The application does not require users to install or operate a local AI model.

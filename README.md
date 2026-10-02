@@ -2,6 +2,18 @@
 
 Vera AI is a web-based conversational assistant built using Python, FastAPI, JavaScript, HTML, and CSS. It integrates the GPT-OSS 20B language model through the Groq API to generate natural-language responses.
 
+
+## Live Demo
+
+**Try Vera AI:** https://yogeshcff.github.io/Vera-Local-AI/
+
+Vera AI is a web-based conversational assistant powered by the GPT-OSS 20B model through the Groq API.
+
+The project consists of a frontend hosted on GitHub Pages and a FastAPI backend deployed on Render.
+
+**Note:** The backend uses Render's free tier, so the first response after inactivity may take longer while the service wakes up.
+
+
 ## Features
 
 * Interactive browser-based chat interface
