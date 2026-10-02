@@ -1,0 +1,16 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Test files
+.pytest_cache/
+
+# OS files
+.DS_Store
+Thumbs.db

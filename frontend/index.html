@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111827">
+    <meta name="description" content="Vera AI - Your personal conversational companion">
+
+    <title>Vera AI</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo">V</div>
+                <div>
+                    <h1>Vera AI</h1>
+                    <p>Your conversational companion</p>
+                </div>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Online
+            </div>
+        </header>
+
+        <main class="chat-container">
+
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-logo">V</div>
+
+                <h2>Hello, I'm Vera.</h2>
+
+                <p>
+                    I'm here to chat, answer simple questions,
+                    and keep you company.
+                </p>
+
+                <p class="welcome-hint">
+                    What would you like to talk about?
+                </p>
+            </div>
+
+            <div class="chat-messages" id="chat-messages"></div>
+
+        </main>
+
+        <footer class="chat-footer">
+
+            <form id="chat-form" class="input-container">
+
+                <input
+                    type="text"
+                    id="message-input"
+                    placeholder="Message Vera..."
+                    autocomplete="off"
+                    required
+                >
+
+                <button type="submit" id="send-button" aria-label="Send message">
+                    ➤
+                </button>
+
+            </form>
+
+            <p class="footer-note">
+                Vera AI · Lightweight conversational assistant
+            </p>
+
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
